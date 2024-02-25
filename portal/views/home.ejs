@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Patient Potal | Home</title>
+    <link rel='stylesheet' href='/css/style.css'>
+    <link rel='stylesheet' href='/css/style2.css'>
+    <link rel='shortcut icon' type='image/png' href='/img/favicon.png'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,700">
+
+</head>
+<body >
+    <%- include("_header.ejs") %>
+    <section class="newBody">
+    <header class="hero">
+        <h1>Welcome to Our Doctor-Patient Portal</h1>
+        <p>Connecting Patients with Trusted Healthcare Providers</p>
+        <a href="/login" class="btn">Get Started</a>
+    </header>
+
+    <section class="about">
+        <div class="container">
+            <h2>About Our Portal</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Our portal provides a convenient platform for patients to schedule appointments, access medical records, and communicate securely with healthcare providers. We prioritize patient privacy and ensure that all interactions within the portal are secure and confidential.</p>
+                    <p>Whether you need to consult with a specialist, schedule routine check-ups, or access your medical history on-the-go, our portal offers a seamless experience tailored to your healthcare needs.</p>
+                </div>
+                <div class="about-image">
+                    <img src="about-image.jpg" alt="About Our Portal">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="container">
+            <h2>How It Works</h2>
+            <div class="steps-container">
+                <div class="step">
+                    <h3>Step 1: Register an Account</h3>
+                    <p>Create your personal account to get started.</p>
+                    <div class="btn-container">
+                        <a href="/signup" class="btn">Register Now</a>
+                    </div>
+                </div>
+                <div class="step">
+                    <h3>Step 2: Find a Doctor</h3>
+                    <p>Browse through our list of trusted healthcare providers.</p>
+                    <div class="btn-container">
+                        <a href="#" class="btn">Find a Doctor</a>
+                    </div>
+                </div>
+                <div class="step">
+                    <h3>Step 3: Schedule an Appointment</h3>
+                    <p>Select a convenient date and time for your appointment.</p>
+                    <div class="btn-container">
+                        <a href="#" class="btn">Schedule Now</a>
+                    </div>
+                </div>
+                <div class="step">
+                    <h3>Step 4: Access Medical Records</h3>
+                    <p>View your medical history and test results securely.</p>
+                    <div class="btn-container">
+                        <a href="#" class="btn">Access Records</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <section class="featured-doctors">
+        <h2>Featured Doctors</h2>
+        <div class="doctor">
+            <img src="doctor1.jpg" alt="Doctor 1">
+            <h3>Dr. Emily Smith</h3>
+            <p>Cardiologist</p>
+        </div>
+        <div class="doctor">
+            <img src="doctor2.jpg" alt="Doctor 2">
+            <h3>Dr. John Doe</h3>
+            <p>Neurologist</p>
+        </div>
+        <!-- Add more featured doctors as needed -->
+    </section>
+</section>
+<%- include("_footer.ejs") %>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<header class="header">
+  <nav class="nav nav--tours">
+    <a href="/" class="nav__el">Home</a>
+    <form class="nav__search">
+      <button class="nav__search-btn">
+        <svg>
+          <use xlink:href="/img/icons.svg#icon-search"></use>
+        </svg>
+      </button>
+      <input type="text" placeholder="Search Doctors" class="nav__search-input">
+    </form>
+  </nav>
+  <div class="header__logo">
+    <img src="/img/logo.png" alt=" Hospital logo">
+  </div>
+  <nav class="nav nav--user">
+    <% if (user) { %>
+      <a href="/logout" class="nav__el nav__el--logout">Log out</a>
+      <a href="/me" class="nav__el">
+        <img src="/img/users/<%= user.photo %>" onerror="this.onerror=null; this.src='/img/users/default.jpg'" class="nav__user-img">
+        <span><%= user.name %></span>
+      </a>
+    <% } else { %>
+      <a href="/login" class="nav__el">Log in</a>
+      <a href="/signup" class="nav__el nav__el--cta">Sign Up</a>
+    <% } %>
+  </nav>
+</header>

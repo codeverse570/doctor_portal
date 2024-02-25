@@ -1,0 +1,206 @@
+/* Reset some default styles */
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+} */
+
+/* Global styles */
+.newBody {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: medium;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header styles */
+.hero {
+    background-color: #f2f2f2;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.hero p {
+    font-size: 1.2em;
+    margin-bottom: 40px;
+    color: #666;
+}
+
+/* Button styles */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* About section styles */
+.about {
+    padding: 60px 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.about h2 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.about-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.about-text {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.about-text p {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+    color: #666;
+}
+
+.about-image img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+/* How It Works section styles */
+.how-it-works {
+    padding: 40px 20px;
+    background-color: #f2f2f2;
+}
+
+.how-it-works h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.steps-container {
+    display: flex;
+    justify-content: space-evenly;
+    /* align-items:flex-start ; */
+    height: 600px;
+    flex-wrap: wrap;
+}
+
+.step { 
+    /* display: flex; */
+    display: block;
+    width: 35%;
+    height: 40%;
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.step:hover {
+    transform: translateY(-5px);
+}
+
+.step h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #007bff;
+}
+
+.step p {
+    font-size: 1.1em;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.btn-container {
+    text-align: center;
+}
+
+.btn-container a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-container a:hover {
+    background-color: #0056b3;
+}
+
+/* Featured Doctors section styles */
+.featured-doctors {
+    padding: 40px 20px;
+    background-color: #fff;
+}
+
+.featured-doctors h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.doctor {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.doctor img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.doctor h3 {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.doctor p {
+    font-size: 1.1em;
+    color: #666;
+}
+
+/* Footer styles
+.footer {
+    padding: 20px 0;
+    text-align: center;
+    background-color: #007bff;
+    color: #fff;
+}
+
+.footer p {
+    font-size: 1.1em;
+} */

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <block head>
+    <title> Doctor Patient Portal | <%= title %></title>
+    <link rel='stylesheet' href='/css/style.css'>
+    <link rel='shortcut icon' type='image/png' href='/img/favicon.png'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,700">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <script src="https://js.stripe.com/v3/"></script>
+  </block>
+  <body data-alert="">
+    <%- include("_header") %>
+    <main class="main">
+      <div class="login-form">
+        <h2 class="heading-secondary ma-bt-lg">Log into your account</h2>
+        <form class="form" id="form" action="/login" method="POST">
+          <div class="form__group">
+            <label class="form__label" for="email">Email address</label>
+            <input class="form__input" id="email" type="email" placeholder="you@example.com" name="email" required>
+          </div>
+          <div class="form__group ma-bt-md">
+            <label class="form__label" for="password">Password</label>
+            <input class="form__input" id="password" type="password" placeholder="••••••••" name="password" required minlength="8">
+          </div>
+          <div class="form__group">
+            <button class="btn btn--green" type="submit">Login</button>
+          </div>
+          <div class="form__group">
+            <a href="/signup" class="redirect-a">New User? Sign Up</a>
+          </div>
+          <div class="form__group">
+            <a href="/forget-password" class="redirect-a">Forget Password</a>
+          </div>
+        </form>
+      </div>
+    </main>
+    <%- include("_footer") %>
+    <script src="/js/bundle.js"></script>
+  </body>
+</html>
