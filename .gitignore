@@ -1,0 +1,4 @@
+*.env
+db.js
+node_farm/
+.cache
