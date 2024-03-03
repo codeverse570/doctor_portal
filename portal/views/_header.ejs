@@ -15,9 +15,9 @@
   </div>
   <nav class="nav nav--user">
     <% if (user) { %>
-      <a href="/logout" class="nav__el nav__el--logout">Log out</a>
+      <a class="nav__el nav__el--logout">Log out</a>
       <a href="/me" class="nav__el">
-        <img src="/img/users/<%= user.photo %>" onerror="this.onerror=null; this.src='/img/users/default.jpg'" class="nav__user-img">
+        <img src="/img/users/<%= user.photo %>" onerror="this.onerror=null; this.src='/img/default.jpg'" class="nav__user-img">
         <span><%= user.name %></span>
       </a>
     <% } else { %>

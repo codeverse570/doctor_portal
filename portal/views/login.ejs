@@ -7,14 +7,14 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,700">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <script src="https://js.stripe.com/v3/"></script>
+    <!-- <script src="https://js.stripe.com/v3/"></script> -->
   </block>
   <body data-alert="">
     <%- include("_header") %>
     <main class="main">
       <div class="login-form">
         <h2 class="heading-secondary ma-bt-lg">Log into your account</h2>
-        <form class="form" id="form" action="/login" method="POST">
+        <form class="form" id="form">
           <div class="form__group">
             <label class="form__label" for="email">Email address</label>
             <input class="form__input" id="email" type="email" placeholder="you@example.com" name="email" required>

@@ -1,20 +1,35 @@
 const express = require("express");
 const app = express();
+const dotenv = require('dotenv')
+dotenv.config({ path: './config.env' })
 const path = require("path");
-
+const userRoute= require("./routes/user")
+const auth =require("./controllers/authControler")
+const errorHandler = require('./controllers/errControler').errorHandler
+const cookieparse = require("cookie-parser")
+app.use(cookieparse())
+const mongoose= require("mongoose")
+const morgan= require('morgan')
+app.use(morgan("tiny"))
+app.use(express.json({ limit: '10kb' }))
+const uri = "mongodb+srv://neeraj:Neeraj%40570@atlascluster.kyrytm8.mongodb.net/?retryWrites=true&w=majority";
+mongoose.connect(uri, {
+    useNewUrlParser: true, 
+    useUnifiedTopology: true 
+}).then(con => {
+    console.log("DB connection successful")
+})
 app.listen(3000,()=>{
     console.log("LISTENNING!");
 })
-
+// app.use(express.static(path.join(__dirname, 'public')))
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname,'/views'));
 app.use(express.static(path.join(__dirname,`public`)));
-
-// route for home page
-app.get("/",(req,res)=>{
-    res.render("home.ejs",{title: "Home",user:false});
+app.use("/api/user",userRoute)
+app.get("/",auth.isLogIn,(req,res)=>{
+    res.render("home.ejs",{title: "Home"});
 })
-// route for login page
 app.get("/login",(req,res)=>{
     res.render("login.ejs",{title: "login",user:false});
 })
@@ -23,5 +38,5 @@ app.get("/login",(req,res)=>{
 app.get("/signup",(req,res)=>{
     res.render("signup.ejs", {title: "signup",user:false});
 })
-
+app.use(errorHandler)
 

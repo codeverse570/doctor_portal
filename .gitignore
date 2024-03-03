@@ -3,3 +3,4 @@ db.js
 node_farm/
 .cache
 .git
+node_modules

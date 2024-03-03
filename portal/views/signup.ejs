@@ -7,14 +7,13 @@
   <link rel='stylesheet' href='/css/style.css'>
   <link rel='shortcut icon' type='image/png' href='/img/favicon.png'>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,700">
-
 </head>
 <body>
   <%- include("_header.ejs") %>
   <main class="main">
     <div class="login-form">
       <h2 class="heading-secondary ma-bt-lg">Create Account</h2>
-      <form class="form" id="signform" action="/signup" method="POST">
+      <form class="form" id="signform">
         <div class="form__group">
           <label class="form__label" for="name">Name</label>
           <input class="form__input" id="name" type="text" placeholder="john willson" name="name" required>
@@ -22,6 +21,10 @@
         <div class="form__group">
           <label class="form__label" for="email">Email address</label>
           <input class="form__input" id="email" type="email" placeholder="you@example.com" name="email" required>
+        </div>
+        <div class="form__group">
+          <label class="form__label" for="phone">Phone No</label>
+          <input class="form__input" id="phone" type="tel" placeholder="you@example.com" name="phone" required>
         </div>
         <div class="form__group ma-bt-md">
           <label class="form__label" for="password">Password</label>
@@ -42,8 +45,6 @@
 
   </main>
   <%- include("_footer.ejs") %>
-  
-  
-  
+  <script src="/js/bundle.js"></script>
 </body>
 </html>
