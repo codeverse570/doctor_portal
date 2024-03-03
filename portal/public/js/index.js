@@ -11,7 +11,7 @@ if (form) {
         e.preventDefault()
         let email = document.getElementById("email").value
         let password = document.getElementById("password").value
-
+        console.log("hello");
         logIn(email, password)
     }) 
 }

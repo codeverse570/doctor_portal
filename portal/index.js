@@ -40,3 +40,12 @@ app.get("/signup",(req,res)=>{
 })
 app.use(errorHandler)
 
+// route for history page
+app.get("/history",(req,res)=>{
+    res.render("history.ejs");
+})
+
+app.get("/findaDoctor",(req,res)=>{
+    res.render("findaDoctor.ejs");
+})
+

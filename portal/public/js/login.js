@@ -3,14 +3,16 @@ import { showAlert } from "./alert"
 export const logIn = async (email, password) => {
   
     try {
+        console.log("sourabh");
         const res = await axios({
             method: "Post",
-            url: "api/user/login",
+            url: "/api/user/login",
             data: {
                 email,
                 password
             } 
         })
+        console.log(res);
         if (res.data.message === "success") {
             showAlert(res.data.message, "logged in successfully")
             window.location.assign('/')
@@ -25,10 +27,11 @@ export const logIn = async (email, password) => {
 }
 export const logout = async () => {
    
-    try {
+    try { console.log("sourabh");
         let res = await axios({
             method: "GET",
             url: "/api/user/logout"
+
         })
         if (res.data.status == 'success') {
             showAlert(res.data.status, 'logout')
