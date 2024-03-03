@@ -138,9 +138,11 @@ userSchema.pre('save',async function(next){
 
 
 const User= new mongoose.model('user',userSchema)
+
 // const doctor= new mongoose.model('doctor',doctorSchema)
 const da= new mongoose.model('data',Data)
 
 module.exports.User=User
 // module.exports.doctor=doctor
 module.exports.Data=da
+

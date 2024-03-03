@@ -9,10 +9,14 @@ const errorHandler = require('./controllers/errControler').errorHandler
 const cookieparse = require("cookie-parser")
 app.use(cookieparse())
 const mongoose= require("mongoose")
-const morgan= require('morgan')
+const morgan= require('morgan');
+const { log } = require("console");
 app.use(morgan("tiny"))
 app.use(express.json({ limit: '10kb' }))
 const uri = "mongodb+srv://neeraj:Neeraj%40570@atlascluster.kyrytm8.mongodb.net/?retryWrites=true&w=majority";
+const user = require("./models/User").User
+const data = require("./models/User").data
+
 mongoose.connect(uri, {
     useNewUrlParser: true, 
     useUnifiedTopology: true 
@@ -49,8 +53,11 @@ app.get("/history",auth.isLogIn,(req,res)=>{
 })
 
 
-app.get("/findaDoctor",auth.restrictTo("user"),(req,res)=>{
-    res.render("findaDoctor.ejs");
+app.get('/findaDoctor', async function(req, res) {
+    console.log("hello hfoidshfoishfoisd");
+    const allDocs = await user.find({role: "doctor"});
+    res.render("findaDoctor", {docArray: allDocs});
+
 })
 
 
