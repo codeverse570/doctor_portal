@@ -61,3 +61,23 @@ export const signUp= async(user)=>{
         showAlert("error", err.response.data.message)
     }
 }
+
+
+export const save_data = async(user)=>{
+    try {
+        console.log('sign')
+        const res = await axios({
+            method: "Post",
+            url: "/api/user/postData",
+            data: user
+        })
+        if (res.data.message === "success") {
+            showAlert(res.data.message, "Data Saved")
+            window.location.assign('/')
+        }
+    }
+    catch (err) {
+        console.log(err)
+        showAlert("error", err.response.data.message)
+    }
+}

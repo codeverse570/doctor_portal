@@ -1,9 +1,12 @@
-const User = require("../models/User")
+const User = require("../models/User").User;
+const data = require("../models/User").Data;
 const jwt = require("jsonwebtoken")
 const appError = require("../utils/appError")
 const catchAsync = require("./errControler").catchAsync
 const {promisify}= require("util")
 const Email = require("./../utils/email")
+
+
 const signUp = catchAsync(async (req, res, next) => {
   console.log(req.body)
     const newUser = await User.create(req.body)
@@ -24,6 +27,29 @@ const signUp = catchAsync(async (req, res, next) => {
     })
   }
   )
+
+
+  const addData = catchAsync(async (req, res, next) => {
+      req.body.doctor= res.locals.user._id
+      // console.log(req.body)
+      const newData = await data.create(req.body)
+      // console.log(newUser)
+      // const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET_KEY, {
+      //   expiresIn: process.env.JWT_EXPIRES_IN
+      // })
+      // res.cookie('jwt', token, {
+      //   expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
+      //   secure: true,
+      //   httpOnly: true
+      // }) 
+      // await new Email(newUser, `http://127.0.0.1:3000/me`).sendWelcomeEmail();
+      res.status(201).json({
+        message: "success",
+        data: newData
+      })
+    }
+    )
+
 const logIn = catchAsync(async (req, res, next) => {
     const { email, password } = req.body
     if (!email || !password) {
@@ -93,7 +119,21 @@ const logIn = catchAsync(async (req, res, next) => {
   
   }
   )
+
+
+  const restrictTo = (...roles) => {
+    return (req, res, next) => {
+      if (roles.includes(res.locals.user.role)) {
+        next()
+      }
+      else {
+        return next(new appError("failed", "You are not authorized to view this page"))
+      }
+    }
+  }
   module.exports.signUp= signUp
   module.exports.isLogIn=isLogIn
   module.exports.logIn= logIn
   module.exports.logOut= logOut
+  module.exports.restrictTo= restrictTo
+  module.exports.addData=addData
