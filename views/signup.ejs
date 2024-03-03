@@ -34,6 +34,15 @@
           <label class="form__label" for="passwordConfirm">Confirm Password</label>
           <input class="form__input" id="passwordConfirm" type="password" placeholder="••••••••" name="passwordConfirm" required minlength="8">
         </div>
+        <div class="form__group ma-bt-md">
+          <label class="form__label" for="passwordConfirm">Role</label>
+          <select class="form__input" id="role" name="role" required>
+            <option value="">Select Role</option>
+            <option value="user">User</option>
+            <option value="doctor">Doctor</option>
+          </select>
+          
+        </div>
         <div class="form__group">
           <button type="submit" class="btn btn--green">Signup</button>
         </div>

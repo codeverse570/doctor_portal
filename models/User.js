@@ -26,8 +26,8 @@ const userSchema =new mongoose.Schema({
     },
     role:{
         type:String,
-        enum:["admin","user","lead-guide","guide"],
-        default:"user"
+        enum:["doctor","user"],
+        required:true
     },
     passwordConfirm:{
         type:String,
@@ -53,10 +53,47 @@ const userSchema =new mongoose.Schema({
         required:true
     }
 
-},{
+},
+
+{
     toJSON:{virtuals:true},
     toObject:{virtuals:true}
 })
+
+
+
+const Data =new mongoose.Schema({
+    name:{
+        type: String,
+        required:true,
+        trim:true
+    },
+    email:{
+        type:String,
+        unique:true,
+        required:true,
+        validate:[validator.isEmail,"Wrong Email format"]
+    },
+    phone:{
+        type:Number,
+        required:true
+    },
+    description:{
+        type:String,
+        required:true
+    },
+    doctor:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"user"
+    }
+},
+
+{
+    toJSON:{virtuals:true},
+    toObject:{virtuals:true}
+})
+
+
 userSchema.methods.correctPassword=function (userPassword,inputPassword) {
     return bcrypt.compare(inputPassword,userPassword)
 }
@@ -85,6 +122,10 @@ userSchema.pre('save',function(next){
       this.passwordChangedAt=Date.now()
       next()
 })
+
+
+
+
 userSchema.pre('save',async function(next){
     if(!this.isModified('password')) return next()
     console.log("hello")
@@ -92,5 +133,16 @@ userSchema.pre('save',async function(next){
     this.passwordConfirm=undefined
     next()
  })
+
+
+
+
 const User= new mongoose.model('user',userSchema)
+
+// const doctor= new mongoose.model('doctor',doctorSchema)
+const da= new mongoose.model('data',Data)
+
 module.exports.User=User
+// module.exports.doctor=doctor
+module.exports.Data=da
+

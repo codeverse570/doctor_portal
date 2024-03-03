@@ -46,13 +46,23 @@ app.get("/signup",(req,res)=>{
 app.use(errorHandler)
 
 // route for history page
-app.get("/history",(req,res)=>{
-    res.render("history.ejs");
+app.get("/history",auth.isLogIn,(req,res)=>{
+    if(res.locals.user.role=="doctor")
+    res.render("history_doctor.ejs");
+   else res.render("history_user.ejs");
 })
+
 
 app.get('/findaDoctor', async function(req, res) {
     console.log("hello hfoidshfoishfoisd");
     const allDocs = await user.find({role: "doctor"});
     res.render("findaDoctor", {docArray: allDocs});
+
 })
+
+
+app.get("/form",auth.isLogIn,auth.restrictTo("doctor"),(req,res)=>{
+    res.render("form.ejs");
+})
+
 

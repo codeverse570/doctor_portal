@@ -1,4 +1,4 @@
-import { logIn,signUp,logout } from "./login.js"
+import { logIn,signUp,logout,save_data} from "./login.js"
 import "@babel/polyfill"
 // import { updateUser, updatePassword, forgetPassword,resetPassword} from "./updateUser"
 // import { showAlert } from "./alert"
@@ -67,9 +67,27 @@ if (signUpForm) {
         const passwordConfirm = document.getElementById("passwordConfirm").value
         const email = document.getElementById("email").value
         const phone =document.getElementById('phone').value
-        await signUp({ name, password, passwordConfirm, email,phone })
+        const role = document.getElementById('role').value
+        await signUp({ name, password, passwordConfirm, email,phone,role })
     })
 }
+
+const Filled_data = document.getElementById("filled_data")
+if (Filled_data) {
+    Filled_data.addEventListener("submit", async (e) => {
+        e.preventDefault()
+        // console.log("hello")
+        const name = document.getElementById("name").value
+        const email = document.getElementById("email").value
+        const phone =document.getElementById('phone').value
+        const description = document.getElementById('description').value
+        // const doctor =Filled_data.dataset.id;
+        await  save_data({name, email,phone,description })
+    })
+}
+
+
+
 const forgetPassForm =document.getElementById("forgetPassForm")
 // console.log(forgetPassForm)
 if(forgetPassForm){
