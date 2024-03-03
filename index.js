@@ -42,11 +42,20 @@ app.get("/signup",(req,res)=>{
 app.use(errorHandler)
 
 // route for history page
-app.get("/history",(req,res)=>{
-    res.render("history.ejs");
+app.get("/history",auth.isLogIn,(req,res)=>{
+    if(res.locals.user.role=="doctor")
+    res.render("history_doctor.ejs");
+   else res.render("history_user.ejs");
 })
 
-app.get("/findaDoctor",(req,res)=>{
+
+app.get("/findaDoctor",auth.restrictTo("user"),(req,res)=>{
     res.render("findaDoctor.ejs");
 })
+
+
+app.get("/form",auth.isLogIn,auth.restrictTo("doctor"),(req,res)=>{
+    res.render("form.ejs");
+})
+
 
