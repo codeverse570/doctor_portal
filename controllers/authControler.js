@@ -1,9 +1,12 @@
-const User = require("../models/User")
+const User = require("../models/User").User;
+const data = require("../models/User").Data;
 const jwt = require("jsonwebtoken")
 const appError = require("../utils/appError")
 const catchAsync = require("./errControler").catchAsync
 const {promisify}= require("util")
 const Email = require("./../utils/email")
+
+
 const signUp = catchAsync(async (req, res, next) => {
   console.log(req.body)
     const newUser = await User.create(req.body)
@@ -24,16 +27,6 @@ const signUp = catchAsync(async (req, res, next) => {
     })
   }
   )
-const restrictTo = (...roles) => {
-    return (req, res, next) => {
-      if (roles.includes(req.user.role)) {
-        next()
-      }
-      else {
-        return next(new appError("failed", "You are not authorized to delete this tour"))
-      }
-    }
-  }
 const logIn = catchAsync(async (req, res, next) => {
     const { email, password } = req.body
     if (!email || !password) {
@@ -103,7 +96,21 @@ const logIn = catchAsync(async (req, res, next) => {
   
   }
   )
+
+
+  const restrictTo = (...roles) => {
+    return (req, res, next) => {
+      if (roles.includes(res.locals.user.role)) {
+        next()
+      }
+      else {
+        return next(new appError("failed", "You are not authorized to view this page"))
+      }
+    }
+  }
   module.exports.signUp= signUp
   module.exports.isLogIn=isLogIn
   module.exports.logIn= logIn
   module.exports.logOut= logOut
+  module.exports.restrictTo= restrictTo
+  module.exports.addData=addData

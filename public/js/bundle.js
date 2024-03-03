@@ -11213,7 +11213,7 @@ var showAlert = exports.showAlert = function showAlert(type, msg) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.signUp = exports.logout = exports.logIn = void 0;
+exports.signUp = exports.save_data = exports.logout = exports.logIn = void 0;
 var _axios = _interopRequireDefault(require("axios"));
 var _alert = require("./alert");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -11334,6 +11334,43 @@ var signUp = exports.signUp = /*#__PURE__*/function () {
   }));
   return function signUp(_x3) {
     return _ref3.apply(this, arguments);
+  };
+}();
+var save_data = exports.save_data = /*#__PURE__*/function () {
+  var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(user) {
+    var res;
+    return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+      while (1) switch (_context4.prev = _context4.next) {
+        case 0:
+          _context4.prev = 0;
+          console.log('sign');
+          _context4.next = 4;
+          return (0, _axios.default)({
+            method: "Post",
+            url: "/api/user/postData",
+            data: user
+          });
+        case 4:
+          res = _context4.sent;
+          if (res.data.message === "success") {
+            (0, _alert.showAlert)(res.data.message, "Data Saved");
+            window.location.assign('/');
+          }
+          _context4.next = 12;
+          break;
+        case 8:
+          _context4.prev = 8;
+          _context4.t0 = _context4["catch"](0);
+          console.log(_context4.t0);
+          (0, _alert.showAlert)("error", _context4.t0.response.data.message);
+        case 12:
+        case "end":
+          return _context4.stop();
+      }
+    }, _callee4, null, [[0, 8]]);
+  }));
+  return function save_data(_x4) {
+    return _ref4.apply(this, arguments);
   };
 }();
 },{"axios":"../../node_modules/axios/index.js","./alert":"alert.js"}],"../../node_modules/regenerator-runtime/runtime.js":[function(require,module,exports) {
@@ -12326,7 +12363,7 @@ var signUpForm = document.getElementById("signform");
 if (signUpForm) {
   signUpForm.addEventListener("submit", /*#__PURE__*/function () {
     var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(e) {
-      var name, password, passwordConfirm, email, phone;
+      var name, password, passwordConfirm, email, phone, role;
       return _regeneratorRuntime().wrap(function _callee3$(_context3) {
         while (1) switch (_context3.prev = _context3.next) {
           case 0:
@@ -12337,15 +12374,17 @@ if (signUpForm) {
             passwordConfirm = document.getElementById("passwordConfirm").value;
             email = document.getElementById("email").value;
             phone = document.getElementById('phone').value;
-            _context3.next = 9;
+            role = document.getElementById('role').value;
+            _context3.next = 10;
             return (0, _login.signUp)({
               name: name,
               password: password,
               passwordConfirm: passwordConfirm,
               email: email,
-              phone: phone
+              phone: phone,
+              role: role
             });
-          case 9:
+          case 10:
           case "end":
             return _context3.stop();
         }
@@ -12356,21 +12395,28 @@ if (signUpForm) {
     };
   }());
 }
-var forgetPassForm = document.getElementById("forgetPassForm");
-// console.log(forgetPassForm)
-if (forgetPassForm) {
-  // console.log('hello')
-  var email = document.getElementById("email");
-  forgetPassForm.addEventListener("submit", /*#__PURE__*/function () {
+var Filled_data = document.getElementById("filled_data");
+if (Filled_data) {
+  Filled_data.addEventListener("submit", /*#__PURE__*/function () {
     var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(e) {
+      var name, email, phone, description;
       return _regeneratorRuntime().wrap(function _callee4$(_context4) {
         while (1) switch (_context4.prev = _context4.next) {
           case 0:
             e.preventDefault();
-            email = email.value;
-            _context4.next = 4;
-            return forgetPassword(email);
-          case 4:
+            // console.log("hello")
+            name = document.getElementById("name").value;
+            email = document.getElementById("email").value;
+            phone = document.getElementById('phone').value;
+            description = document.getElementById('description').value; // const doctor =Filled_data.dataset.id;
+            _context4.next = 7;
+            return (0, _login.save_data)({
+              name: name,
+              email: email,
+              phone: phone,
+              description: description
+            });
+          case 7:
           case "end":
             return _context4.stop();
         }
@@ -12381,24 +12427,21 @@ if (forgetPassForm) {
     };
   }());
 }
-var resetPasswordForm = document.getElementById("resetPasswordForm");
-if (resetPasswordForm) {
-  resetPasswordForm.addEventListener("submit", /*#__PURE__*/function () {
+var forgetPassForm = document.getElementById("forgetPassForm");
+// console.log(forgetPassForm)
+if (forgetPassForm) {
+  // console.log('hello')
+  var email = document.getElementById("email");
+  forgetPassForm.addEventListener("submit", /*#__PURE__*/function () {
     var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(e) {
-      var password, passwordConfirm, token;
       return _regeneratorRuntime().wrap(function _callee5$(_context5) {
         while (1) switch (_context5.prev = _context5.next) {
           case 0:
             e.preventDefault();
-            password = document.getElementById("password").value;
-            passwordConfirm = document.getElementById("confirmPassword").value;
-            token = e.target.dataset.token; //    console.log(password,passwordConfirm)
-            _context5.next = 6;
-            return resetPassword({
-              password: password,
-              passwordConfirm: passwordConfirm
-            }, token);
-          case 6:
+            email = email.value;
+            _context5.next = 4;
+            return forgetPassword(email);
+          case 4:
           case "end":
             return _context5.stop();
         }
@@ -12406,6 +12449,34 @@ if (resetPasswordForm) {
     }));
     return function (_x5) {
       return _ref5.apply(this, arguments);
+    };
+  }());
+}
+var resetPasswordForm = document.getElementById("resetPasswordForm");
+if (resetPasswordForm) {
+  resetPasswordForm.addEventListener("submit", /*#__PURE__*/function () {
+    var _ref6 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6(e) {
+      var password, passwordConfirm, token;
+      return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+        while (1) switch (_context6.prev = _context6.next) {
+          case 0:
+            e.preventDefault();
+            password = document.getElementById("password").value;
+            passwordConfirm = document.getElementById("confirmPassword").value;
+            token = e.target.dataset.token; //    console.log(password,passwordConfirm)
+            _context6.next = 6;
+            return resetPassword({
+              password: password,
+              passwordConfirm: passwordConfirm
+            }, token);
+          case 6:
+          case "end":
+            return _context6.stop();
+        }
+      }, _callee6);
+    }));
+    return function (_x6) {
+      return _ref6.apply(this, arguments);
     };
   }());
 }
@@ -12434,7 +12505,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65093" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63565" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
