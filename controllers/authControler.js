@@ -24,6 +24,16 @@ const signUp = catchAsync(async (req, res, next) => {
     })
   }
   )
+const restrictTo = (...roles) => {
+    return (req, res, next) => {
+      if (roles.includes(req.user.role)) {
+        next()
+      }
+      else {
+        return next(new appError("failed", "You are not authorized to delete this tour"))
+      }
+    }
+  }
 const logIn = catchAsync(async (req, res, next) => {
     const { email, password } = req.body
     if (!email || !password) {
