@@ -27,7 +27,7 @@ export const logIn = async (email, password) => {
 }
 export const logout = async () => {
    
-    try { console.log("sourabh");
+    try { 
         let res = await axios({
             method: "GET",
             url: "/api/user/logout"

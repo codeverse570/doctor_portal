@@ -11270,30 +11270,29 @@ var logout = exports.logout = /*#__PURE__*/function () {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
           _context2.prev = 0;
-          console.log("sourabh");
-          _context2.next = 4;
+          _context2.next = 3;
           return (0, _axios.default)({
             method: "GET",
             url: "/api/user/logout"
           });
-        case 4:
+        case 3:
           res = _context2.sent;
           if (res.data.status == 'success') {
             (0, _alert.showAlert)(res.data.status, 'logout');
             window.location.reload(true);
           }
-          _context2.next = 12;
+          _context2.next = 11;
           break;
-        case 8:
-          _context2.prev = 8;
+        case 7:
+          _context2.prev = 7;
           _context2.t0 = _context2["catch"](0);
           console.log(_context2.t0);
           (0, _alert.showAlert)("error", _context2.t0.response.data.message);
-        case 12:
+        case 11:
         case "end":
           return _context2.stop();
       }
-    }, _callee2, null, [[0, 8]]);
+    }, _callee2, null, [[0, 7]]);
   }));
   return function logout() {
     return _ref2.apply(this, arguments);
@@ -12505,7 +12504,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63565" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61308" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

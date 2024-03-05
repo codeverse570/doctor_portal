@@ -23,27 +23,25 @@ mongoose.connect(uri, {
 }).then(con => {
     console.log("DB connection successful")
 })
-app.listen(3000,()=>{
-    console.log("LISTENNING!");
-})
+ 
 // app.use(express.static(path.join(__dirname, 'public')))
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname,'/views'));
 app.use(express.static(path.join(__dirname,`public`)));
+
 app.use("/api/user",userRoute)
 
 app.get("/",auth.isLogIn,(req,res)=>{
     res.render("home.ejs",{title: "Home"});
 })
-app.get("/login",(req,res)=>{
-    res.render("login.ejs",{title: "login",user:false});
+app.get("/login",auth.isLogIn,(req,res)=>{
+    res.render("login.ejs",{title: "login"});
 })
 
 // route for signup page
-app.get("/signup",(req,res)=>{
-    res.render("signup.ejs", {title: "signup",user:false});
+app.get("/signup",auth.isLogIn,(req,res)=>{
+    res.render("signup.ejs", {title: "signup"});
 })
-app.use(errorHandler)
 
 // route for history page
 app.get("/history",auth.isLogIn,(req,res)=>{
@@ -59,10 +57,11 @@ app.get('/findaDoctor', async function(req, res) {
     res.render("findaDoctor", {docArray: allDocs});
 
 })
-
-
 app.get("/form",auth.isLogIn,auth.restrictTo("doctor"),(req,res)=>{
     res.render("form.ejs");
 })
-
+app.use(errorHandler)
+app.listen(3000,()=>{ 
+    console.log("LISTENNING!");
+})
 
