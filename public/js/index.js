@@ -1,4 +1,5 @@
 import { logIn,signUp,logout,save_data} from "./login.js"
+import {updateUser,updatePassword} from "./updateUser.js"
 import "@babel/polyfill"
 // import { updateUser, updatePassword, forgetPassword,resetPassword} from "./updateUser"
 // import { showAlert } from "./alert"
@@ -30,8 +31,10 @@ if (updateForm) {
         let email = document.getElementById("email").value
         let name = document.getElementById("name").value
         let photo = document.getElementById("photo").files[0]
+        let phone= document.getElementById("phone").value
         form.append("email", email)
         form.append("name", name)
+        form.append("phone",phone)
         form.append("photo", photo)
         updateUser(form)
     })
