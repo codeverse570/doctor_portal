@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Doctor Patient Portal|Home</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- font awesome -->
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+        <!-- owl carousel -->
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4//owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4//owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+        <!-- custom css -->
+        <link rel = "stylesheet" href = "/css/style.css" />
+        <!-- <link rel = "stylesheet" href = "/css/utilities.css" /> -->
+        <!-- normalize.css -->
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+    </head>
+<body>
+    <%- include("_header") %>
+    <% function renderSideItem(link, icon, text, active) { %>
+        <li class="<%= active ? 'side-nav--active' : '' %>">
+          <a href="<%= link %>">
+            <svg>
+              <use xlink:href="images/icons.svg#icon-<%= icon %>"></use>
+            </svg>
+            <%= text %>
+          </a>
+        </li>
+      <% } %>
+      
+      <main class="main">
+        <div class="user-view">
+          <nav class="user-view__menu">
+            <ul class="side-nav">
+              <% renderSideItem("#", "settings", "Settings", true) %>
+              <!-- <% renderSideItem("/mytours", "briefcase", "My bookings", false) %> -->
+              <!-- <% renderSideItem("#", "star", "My reviews", false) %> -->
+              <% renderSideItem("/history", "clock", "History", false) %>
+              <% renderSideItem("/forget-password", "alert-circle", "Forget Password", false) %>
+            </ul>
+            <% if (user.role == "admin") { %>
+              <div class="admin-nav">
+                <h5 class="admin-nav__heading">Admin</h5>
+                <ul class="side-nav">
+                  <% renderSideItem("#", "map", "Manage tours", false) %>
+                  <% renderSideItem("#", "users", "Manage users", false) %>
+                  <% renderSideItem("#", "star", "Manage reviews", false) %>
+                  <% renderSideItem("#", "briefcase", "Manage bookings", false) %>
+                  <% renderSideItem("/stats", "bar-chart", "Stats", false) %>
+                </ul>
+              </div>
+            <% } %>
+          </nav>
+      
+          <div class="user-view__content">
+            <div class="user-view__form-container">
+              <h2 class="heading-secondary ma-bt-md">Your account settings</h2>
+              <form class="form form-user-data" id="updateform">
+                <div class="form__group">
+                  <label class="form__label" for="name">Name</label>
+                  <input class="form__input" type="text" id="name" value="<%= user.name %>" required>
+                </div>
+                <div class="form__group ma-bt-md">
+                  <label class="form__label" for="email">Email address</label>
+                  <input class="form__input" type="email" id="email" value="<%= user.email %>" required>
+                </div>
+                <div class="form__group ma-bt-md">
+                    <label class="form__label" for="phone">phone</label>
+                    <input class="form__input" type="tel" id="phone" value="<%= user.phone %>" required>
+                  </div>
+                <div class="form__group form__photo-upload">
+                  <img class="form__user-photo" src="/images/users/<%= user.photo %>" alt="user photo">
+                  <input class="form__upload" type="file" id="photo" name="photo" accept="image/*">
+                  <label for="photo">Choose a photo</label>
+                </div>
+                <div class="form__group right">
+                  <button class="btn btn--small btn--green" type="submit">Save settings</button>
+                </div>
+              </form>
+            </div>
+      
+            <div class="line">&nbsp;</div>
+      
+            <div class="user-view__form-container">
+              <h2 class="heading-secondary ma-bt-md">Password change</h2>
+              <form class="form form-user-settings" id="password-form">
+                <div class="form__group">
+                  <label class="form__label" for="password-current">Current password</label>
+                  <input class="form__input" type="password" id="password-current" placeholder="••••••••" required minlength="8">
+                </div>
+                <div class="form__group">
+                  <label class="form__label" for="password">New password</label>
+                  <input class="form__input" type="password" id="password" placeholder="••••••••" required minlength="8">
+                </div>
+                <div class="form__group ma-bt-lg">
+                  <label class="form__label" for="password-confirm">Confirm password</label>
+                  <input class="form__input" type="password" id="password-confirm" placeholder="••••••••" required minlength="8">
+                </div>
+                <div class="form__group right">
+                  <button class="btn btn--small btn--green" type="submit">Save password</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </main>
+      <%- include("_footer") %>
+      <script src="/js/bundle.js"></script>
+</body>
+</html>

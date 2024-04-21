@@ -17,7 +17,7 @@
     <% if (user) { %>
       <a class="nav__el nav__el--logout">Log out</a>
       <a href="/me" class="nav__el">
-        <img src="/img/users/<%= user.photo %>" onerror="this.onerror=null; this.src='/img/default.jpg'" class="nav__user-img">
+        <img src="/images/users/<%= user.photo %>" onerror="this.onerror=null; this.src='/img/default.jpg'" class="nav__user-img">
         <span><%= user.name %></span>
       </a>
     <% } else { %>

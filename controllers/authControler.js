@@ -122,7 +122,10 @@ const logIn = catchAsync(async (req, res, next) => {
 
   const restrictTo = (...roles) => {
     return (req, res, next) => {
-      if (roles.includes(res.locals.user.role)) {
+      console.log(res.locals.user.role)
+      if (roles.includes(res.locals.user.role)) { 
+        // console.log('hello')
+        
         next()
       }
       else {
@@ -131,9 +134,78 @@ const logIn = catchAsync(async (req, res, next) => {
       }
     }
   }
+  const changePassword = catchAsync(async (req, res, next) => {
+    let token;
+    const { currentPassword, password, passwordConfirm } = req.body
+    if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
+      token = req.headers.authorization.split(" ")[1]
+    }
+    else if (req.cookies.jwt) {
+      token = req.cookies.jwt
+    }
+    if (token) {
+      const payload = await promisify(jwt.verify)(token, process.env.JWT_SECRET_KEY)
+      const newUser = await User.findOne({ _id: payload.id }).select('+password')
+      if (newUser) {
+        req.user = newUser
+        const correct = await newUser.correctPassword(newUser.password, currentPassword)
+        if (!correct) next(new appError("failed", "current password is not correct!"))
+        if (!newUser.isPassUpdate(payload.iat)) {
+          newUser.password = password
+          newUser.passwordConfirm = passwordConfirm
+  
+          await newUser.save()
+          res.status(200).json({
+            message: "success",
+            data: newUser
+          })
+        }
+        else next(new appError("failed", "Password is Changed please log in again!"))
+      }
+      else {
+        next(new appError("failed", "User Not Found"))
+      }
+  
+    }
+    else {
+      next(new appError("failed", "you are not logged in please log in to get access"))
+    }
+  })
+  const checkLog = catchAsync(async (req, res, next) => {
+    let token;
+    if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
+  
+      token = req.headers.authorization.split(" ")[1]
+    }
+    else if (req.cookies.jwt) {
+      token = req.cookies.jwt
+    }
+  
+    if (token) {
+      const payload = await promisify(jwt.verify)(token, process.env.JWT_SECRET_KEY)
+      const newUser = await User.findOne({ _id: payload.id })
+      if (newUser) {
+  
+        req.user = newUser
+        if (!newUser.isPassUpdate(payload.iat)) next()
+        else next(new appError("failed", "Password is Changed please log in again!"))
+      }
+      else {
+        next(new appError("failed", "User Not Found"))
+      }
+  
+    }
+    else {
+      next(new appError("failed", "you are not logged in please log in to get access"))
+    }
+  
+  }
+  )
   module.exports.signUp= signUp
   module.exports.isLogIn=isLogIn
   module.exports.logIn= logIn
   module.exports.logOut= logOut
   module.exports.restrictTo= restrictTo
   module.exports.addData=addData
+  module.exports.checkLog= checkLog
+  module.exports.changePassword= changePassword

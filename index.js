@@ -44,24 +44,27 @@ app.get("/signup",auth.isLogIn,(req,res)=>{
 })
 
 // route for history page
-app.get("/history",auth.isLogIn,(req,res)=>{
+app.get("/history",auth.isLogIn,auth.checkLog,(req,res)=>{
     if(res.locals.user.role=="doctor")
     res.render("history_doctor.ejs");
    else res.render("history_user.ejs");
 })
 
 
-app.get('/findaDoctor', async function(req, res) {
+app.get('/findaDoctor',auth.isLogIn,auth.checkLog, async function(req, res) {
     console.log("hello hfoidshfoishfoisd");
     const allDocs = await user.find({role: "doctor"});
     res.render("findaDoctor", {docArray: allDocs});
 
 })
-app.get("/form",auth.isLogIn,auth.restrictTo("doctor"),(req,res)=>{
+app.get("/form",auth.isLogIn,auth.checkLog, auth.restrictTo("doctor"),(req,res)=>{
     res.render("form.ejs");
 })
+app.get("/profile",auth.isLogIn,auth.checkLog,(req,res)=>{
+     res.render("profile")
+})
 app.use(errorHandler)
-app.listen(3000,()=>{ 
+app.listen(3000,()=>{  
     console.log("LISTENNING!");
 })
 
