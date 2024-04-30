@@ -9,6 +9,19 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <title> Find a doctor </title>
     <link href="/css/doctorCard.css" rel="stylesheet">
+    <style>
+      body{
+        background-color: #458ff6;
+      };
+      .doctorBox{
+        background-color: white;
+        margin-bottom: 10px;
+      };
+      #Doctor{
+        color: white;
+      }
+
+    </style>
   </head>
  
     <body> 
@@ -18,9 +31,9 @@
         <div class="container">
             <a href="/" style="color: white;"><h3>Home</h3></a>
           <div class="section-title">
-            <h2>Our doctors</h2>
+            <h2 id="Doctor" style="color: white;">Our doctors</h2>
             <div class="underline"></div>
-            <p>Here are the list of world class certified Doctors!</p>
+            <p style="color: white;">Here are the list of world class certified Doctors!</p>
           </div>
           <div class="row">
   
@@ -29,14 +42,14 @@
 
              <% docArray.forEach(function(item) { %>
 
-              <div class="member d-flex align-items-start" >
+              <div class="member d-flex align-items-start"  class="doctorBox">
                 <div class="teampic"><img src=<%=`https://xsgames.co/randomusers/avatar.php?g=male`%> class="img-fluid" alt=""></div>
                 <div class="member-info">
-                  <h4><%= item.name %></h4>
+                  <h4>Name: <%= item.name %></h4>
                   <h3><%= item.speciality %></h3>
                   <p><%= item.experience %></p>
-                  <p> <%= item.phone %> </p>
-                  <p><%= item.address %></p>
+                  <p>Phone Number: <%= item.phone %> </p>
+                  <p>Social Medias:<%= item.address %></p>
                   
                   <div class="social">
                     <a href=""><i class="bi bi-facebook"></i></a>
