@@ -5,11 +5,8 @@ const appError = require("../utils/appError")
 const catchAsync = require("./errControler").catchAsync
 const {promisify}= require("util")
 const Email = require("./../utils/email");
-<<<<<<< HEAD
-const { data } = require("../models/User");
-=======
+
 const { Data,Data2} = require("../models/User");
->>>>>>> 6b4ecb5e9e92f03eda40fafc91c24c46be8217d2
 
 
 const signUp = catchAsync(async (req, res, next) => {
@@ -37,7 +34,7 @@ const signUp = catchAsync(async (req, res, next) => {
   const addData = catchAsync(async (req, res, next) => {
     req.body.doctor= res.locals.user._id
     console.log(req.body)
-    const newData = await data.create(req.body)
+    const newData = await Data.create(req.body)
     
   
     
