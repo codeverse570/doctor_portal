@@ -70,7 +70,6 @@ const Data =new mongoose.Schema({
     },
     email:{
         type:String,
-        unique:true,
         required:true,
         validate:[validator.isEmail,"Wrong Email format"]
     },
@@ -85,6 +84,36 @@ const Data =new mongoose.Schema({
     doctor:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"user"
+    }
+},
+{
+    toJSON:{virtuals:true},
+    toObject:{virtuals:true}
+})
+
+const Data2 =new mongoose.Schema({
+    name:{
+        type: String,
+        required:true,
+        trim:true
+    },
+    email:{
+        type:String,
+        unique:true,
+        required:true,
+        validate:[validator.isEmail,"Wrong Email format"]
+    },
+    disease:{
+        type:String,
+        required:true
+    },
+    symptoms:{
+        type:String,
+        required:true
+    },
+    duration:{
+        type:Number,
+        required:true
     }
 },
 
@@ -141,8 +170,10 @@ const User= new mongoose.model('user',userSchema)
 
 // const doctor= new mongoose.model('doctor',doctorSchema)
 const da= new mongoose.model('data',Data)
+const da2= new mongoose.model('data2',Data2)
 
 module.exports.User=User
 // module.exports.doctor=doctor
 module.exports.Data=da
+module.exports.Data2=da2
 
