@@ -70,7 +70,6 @@ const Data =new mongoose.Schema({
     },
     email:{
         type:String,
-        unique:true,
         required:true,
         validate:[validator.isEmail,"Wrong Email format"]
     },
@@ -140,9 +139,9 @@ userSchema.pre('save',async function(next){
 const User= new mongoose.model('user',userSchema)
 
 // const doctor= new mongoose.model('doctor',doctorSchema)
-const da= new mongoose.model('data',Data)
+const data= new mongoose.model('data',Data)
 
 module.exports.User=User
 // module.exports.doctor=doctor
-module.exports.Data=da
+module.exports.data=data
 
