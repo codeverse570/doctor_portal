@@ -1,4 +1,4 @@
-import { logIn,signUp,logout,save_data} from "./login.js"
+import { logIn,signUp,logout,save_data,save_data2} from "./login.js"
 import {updateUser,updatePassword} from "./updateUser.js"
 import "@babel/polyfill"
 // import { updateUser, updatePassword, forgetPassword,resetPassword} from "./updateUser"
@@ -79,7 +79,7 @@ const Filled_data = document.getElementById("filled_data")
 if (Filled_data) {
     Filled_data.addEventListener("submit", async (e) => {
         e.preventDefault()
-        // console.log("hello")
+        console.log("hello")
         const name = document.getElementById("name").value
         const email = document.getElementById("email").value
         const phone =document.getElementById('phone').value
@@ -89,7 +89,46 @@ if (Filled_data) {
     })
 }
 
+const Filled_data2 = document.getElementById("filled_data2");
+console.log(Filled_data2)
+if (Filled_data2) {
+    
+Filled_data2.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const disease = document.getElementById("disease").value;
+    const symptoms = document.getElementById("symptoms").value;
+    const duration = document.getElementById("duration").value;
+    await save_data2({name, email, disease, symptoms, duration});
+});
+}
+// const Filled_data2 = document.getElementById('filled_data2');
 
+// Filled_data2.addEventListener('submit', async (e) => {
+//   e.preventDefault();
+
+//   const formData = new FormData(form);
+//   const data = Object.fromEntries(formData);
+
+//   try {
+//     const response = await fetch('/submit-form', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify(data),
+//     });
+
+//     if (response.ok) {
+//       console.log('Data submitted successfully');
+//     } else {
+//       console.error('Error submitting data');
+//     }
+//   } catch (err) {
+//     console.error('Error:', err);
+//   }
+// });
 
 const forgetPassForm =document.getElementById("forgetPassForm")
 // console.log(forgetPassForm)

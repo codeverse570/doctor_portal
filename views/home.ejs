@@ -69,9 +69,16 @@
                                     <li class = "nav-item">
                                         <a href = "/history" class = "nav-link text-white text-nowrap">History</a>
                                     </li>
-                                    <li class = "nav-item">
-                                        <a href = "/form" class = "nav-link text-white text-nowrap">Fill up</a>
-                                    </li>
+                                    <% if(user.role=="user"){ %>
+                                        <li class = "nav-item">
+                                            <a href = "/form2" class = "nav-link text-white text-nowrap">Fill it</a>
+                                        </li>
+                                      <% } else{ %>  
+                                        <li class = "nav-item">
+                                            <a href = "/form" class = "nav-link text-white text-nowrap">Fill up</a>
+                                        </li>
+                                     <% } %>
+                                    
                                 </ul>
                             </div>
                         </div>

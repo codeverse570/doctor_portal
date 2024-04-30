@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctor Patient portal | Disease Information</title>
+  <link rel='stylesheet' href='/css/style.css'>
+  <link rel='shortcut icon' type='image/png' href='/img/favicon.png'>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,700">
+</head>
+<body>
+  <%- include("_header.ejs") %>
+<main class="main">
+    <div class="disease-form">
+        <h2 class="heading-secondary ma-bt-lg">Disease Information Form</h2>
+        <form class="form" id="filled_data2" >
+            <div class="form__group">
+                <label class="form__label" for="name">Name</label>
+                <input class="form__input" id="name" type="text" placeholder="John Willson" name="name" required>
+            </div>
+            <div class="form__group">
+                <label class="form__label" for="email">Email address</label>
+                <input class="form__input" id="email" type="email" placeholder="you@example.com" name="email" required>
+            </div>
+            <div class="form__group">
+                <label class="form__label" for="disease">Disease</label>
+                <input class="form__input" id="disease" type="text" placeholder="Enter your disease" name="disease" required>
+            </div>
+            <div class="form__group">
+                <label class="form__label" for="symptoms">Symptoms</label>
+                <textarea class="form__input" id="symptoms" placeholder="Enter symptoms" name="symptoms" required></textarea>
+            </div>
+            <div class="form__group">
+                <label class="form__label" for="duration">Duration of Disease</label>
+                <input class="form__input" id="duration" type="text" placeholder="Enter duration of disease" name="duration" required>
+            </div>
+            <div class="form__group">
+                <button type="submit" class="btn btn--green">Submit Information</button>
+            </div>
+        </form>
+    </div>
+
+  </main>
+  <%- include("_footer.ejs") %>
+  <script src="/js/bundle.js"></script>
+</body>
+</html>
