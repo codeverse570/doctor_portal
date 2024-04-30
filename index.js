@@ -49,15 +49,17 @@ app.get("/history", auth.isLogIn, auth.checkLog, async (req, res) => {
     const currUser = res.locals;
 
     if (currUser.user.role == 'user') {
-        const allHistory = await data.find({ email: currUser.user.email });
+        const allHistory = await data.find({ email: currUser.user.email }).populate('doctor');
         res.render("history_user", { preHistory: allHistory });
     }
     else if (currUser.user.role == 'doctor') {
-        const allHistory = await data.find({ doctor: currUser.user._id });
+        const allHistory = await data.find({ doctor: currUser.user._id }).populate('doctor');
         console.log(allHistory);
         res.render("history_user", { preHistory: allHistory });
     }
-})
+});
+
+
 
 
 app.get('/findaDoctor', auth.isLogIn, auth.checkLog, async function (req, res) {

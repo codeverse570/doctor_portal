@@ -9,8 +9,31 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-  <title>History | user</title>
+  <title>History | <% if(user.role == "doctor"){ %>
+            Doctor
+    <% } else{%>
+        Patient
+      <% } %>
+  </title>
   <link href="/css/doctorCard.css" rel="stylesheet">
+
+  <style>
+      body{
+        background-color: #458ff6;
+      };
+      .doctorBox{
+        background-color: white;
+        margin-bottom: 10px;
+      };
+      #Doctor{
+        color: white;
+      };
+      #description{
+        display: flex;
+        flex-direction: column;
+      }
+
+    </style>
 </head>
 
 <body>
@@ -22,21 +45,34 @@
         <h3>Home</h3>
       </a>
       <div class="section-title">
-        <h2>Patient History</h2>
+        <h2 style="color: white;"><%= user.role== "doctor" ? "Doctor History" : "Patient History" %></h2>
         <div class="underline"></div>
-        <p>Here you can see you medical History!</p>
+        <p style="color: white;">Here you can see you medical History!</p>
       </div>
       <div class="row">
 
         <div class="col-lg-6">
           <!-- Demo doctor-->
 
-          <div class="member d-flex align-items-start">
+          <div class="member align-items-start" class="doctorBox">
             <% preHistory.forEach(function(item) { %>
               <div class="member-info">
-                <h4>
+              <div id="description" >
+                <h4><% if(user.role== "doctor"){ %>
+                     <%= item.name %>
+                  <% } else{%>
+
+                    <%= item.doctor.name %>
+                    <% } %>
+                </h4>
+                <p>
                   <%= item.description %>
-                </h4><br>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, eaque consectetur. Quod, fugiat sapiente distinctio assumenda voluptatum ullam similique rerum voluptatibus quisquam, debitis saepe? Culpa aperiam rem voluptates impedit placeat?
+                </p>
+                
+              </div>
+
+              
 
               </div>
               <% }) %>
