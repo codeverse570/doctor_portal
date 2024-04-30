@@ -5,7 +5,11 @@ const appError = require("../utils/appError")
 const catchAsync = require("./errControler").catchAsync
 const {promisify}= require("util")
 const Email = require("./../utils/email");
+<<<<<<< HEAD
 const { data } = require("../models/User");
+=======
+const { Data,Data2} = require("../models/User");
+>>>>>>> 6b4ecb5e9e92f03eda40fafc91c24c46be8217d2
 
 
 const signUp = catchAsync(async (req, res, next) => {
@@ -37,6 +41,27 @@ const signUp = catchAsync(async (req, res, next) => {
     
   
     
+    // console.log(newUser)
+    // const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET_KEY, {
+    //   expiresIn: process.env.JWT_EXPIRES_IN
+    // })
+    // res.cookie('jwt', token, {
+    //   expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
+    //   secure: true,
+    //   httpOnly: true
+    // }) 
+    // await new Email(newUser, `http://127.0.0.1:3000/me`).sendWelcomeEmail();
+    res.status(201).json({
+      message: "success",
+      data: newData
+    })
+  }
+  )
+  const addData2 = catchAsync(async (req, res, next) => {
+    // req.body.doctor= res.locals.user._id
+    // console.log(req.body)
+   console.log(req.body)
+    const newData = await Data2.create(req.body)
     // console.log(newUser)
     // const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET_KEY, {
     //   expiresIn: process.env.JWT_EXPIRES_IN
@@ -212,4 +237,5 @@ const logIn = catchAsync(async (req, res, next) => {
   module.exports.restrictTo= restrictTo
   module.exports.addData=addData
   module.exports.checkLog= checkLog
+  module.exports.addData2=addData2
   module.exports.changePassword= changePassword

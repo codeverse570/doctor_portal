@@ -15,7 +15,7 @@ app.use(morgan("tiny"))
 app.use(express.json({ limit: '10kb' }))
 const uri = "mongodb+srv://neeraj:Neeraj%40570@atlascluster.kyrytm8.mongodb.net/?retryWrites=true&w=majority";
 const user = require("./models/User").User
-const data = require("./models/User").data
+
 
 mongoose.connect(uri, {
     useNewUrlParser: true,
