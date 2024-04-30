@@ -70,7 +70,6 @@ const Data =new mongoose.Schema({
     },
     email:{
         type:String,
-        unique:true,
         required:true,
         validate:[validator.isEmail,"Wrong Email format"]
     },
@@ -170,6 +169,13 @@ userSchema.pre('save',async function(next){
 const User= new mongoose.model('user',userSchema)
 
 // const doctor= new mongoose.model('doctor',doctorSchema)
+<<<<<<< HEAD
+const data= new mongoose.model('data',Data)
+
+module.exports.User=User
+// module.exports.doctor=doctor
+module.exports.data=data
+=======
 const da= new mongoose.model('data',Data)
 const da2= new mongoose.model('data2',Data2)
 
@@ -177,4 +183,5 @@ module.exports.User=User
 // module.exports.doctor=doctor
 module.exports.Data=da
 module.exports.Data2=da2
+>>>>>>> 6b4ecb5e9e92f03eda40fafc91c24c46be8217d2
 

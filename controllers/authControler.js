@@ -1,11 +1,15 @@
 const User = require("../models/User").User;
-const data = require("../models/User").Data;
+// const data = require("../models/User").Data;
 const jwt = require("jsonwebtoken")
 const appError = require("../utils/appError")
 const catchAsync = require("./errControler").catchAsync
 const {promisify}= require("util")
 const Email = require("./../utils/email");
+<<<<<<< HEAD
+const { data } = require("../models/User");
+=======
 const { Data,Data2} = require("../models/User");
+>>>>>>> 6b4ecb5e9e92f03eda40fafc91c24c46be8217d2
 
 
 const signUp = catchAsync(async (req, res, next) => {
@@ -32,8 +36,11 @@ const signUp = catchAsync(async (req, res, next) => {
 
   const addData = catchAsync(async (req, res, next) => {
     req.body.doctor= res.locals.user._id
-    // console.log(req.body)
+    console.log(req.body)
     const newData = await data.create(req.body)
+    
+  
+    
     // console.log(newUser)
     // const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET_KEY, {
     //   expiresIn: process.env.JWT_EXPIRES_IN
@@ -125,9 +132,10 @@ const logIn = catchAsync(async (req, res, next) => {
       res.locals.user= false;
       return next()
     }
+    
     const payload = await promisify(jwt.verify)(token, process.env.JWT_SECRET_KEY)
-  console.log(payload)
-    const newUser = await User.findOne({ _id: payload.id })
+    
+     const newUser = await User.findOne({ _id: payload.id })
   
     if (!newUser) {
        res.locals.user= false;
