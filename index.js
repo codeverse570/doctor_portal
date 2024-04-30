@@ -16,6 +16,7 @@ app.use(express.json({ limit: '10kb' }))
 const uri = "mongodb+srv://neeraj:Neeraj%40570@atlascluster.kyrytm8.mongodb.net/?retryWrites=true&w=majority";
 const user = require("./models/User").User
 const data= require('./models/User').Data
+const data2= require('./models/User').Data2
 
 
 mongoose.connect(uri, {
@@ -59,6 +60,16 @@ app.get("/history", auth.isLogIn, auth.checkLog, async (req, res) => {
     }
 });
 
+app.get("/patient_data", auth.isLogIn, auth.checkLog, async (req, res) => {
+    const currUser = res.locals;
+
+    if (currUser.user.role == 'doctor') {
+        const allHistory = await data2.find();
+        console.log(allHistory);
+        res.render("patient_data", { predata: allHistory });
+    }
+});
+
 
 
 
@@ -69,8 +80,18 @@ app.get('/findaDoctor', auth.isLogIn, auth.checkLog, async function (req, res) {
     res.render("findaDoctor", { docArray: allDocs });
 
 })
+// app.get('/findaDoctor', auth.isLogIn, auth.checkLog, async function (req, res) {
+//     console.log("hello hfoidshfoishfoisd");
+//     const allDocs = await user.find({ role: "doctor" });
+
+//     res.render("findaDoctor", { docArray: allDocs });
+
+// })
 app.get("/form", auth.isLogIn, auth.checkLog, auth.restrictTo("doctor"), (req, res) => {
     res.render("form.ejs");
+})
+app.get("/form2", auth.isLogIn, auth.checkLog, auth.restrictTo("user"), (req, res) => {
+    res.render("form2.ejs");
 })
 app.get("/profile", auth.isLogIn, auth.checkLog, (req, res) => {
     res.render("profile")

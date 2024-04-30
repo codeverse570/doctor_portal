@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Data</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    form {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    #searchInput {
+      padding: 10px;
+      width: 300px;
+      font-size: 16px;
+    }
+
+    #searchResults {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .result {
+      background-color: #f2f2f2;
+      padding: 20px;
+      margin: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      width: 300px;
+    }
+
+    .result h4 {
+      margin-top: 0;
+    }
+
+    .result p {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Patient Data</h1>
+  <form>
+    <input type="text" id="searchInput" placeholder="Search..." />
+  </form>
+  <div id="searchResults"></div>
+
+  <script>
+    const predataString = `<%- JSON.stringify(predata) %>`;
+    const predata = JSON.parse(predataString);
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+
+    function filterData() {
+      const searchQuery = searchInput.value.toLowerCase();
+      const filteredData = predata.filter((item) => {
+        const name = item.name.toLowerCase();
+        const disease = item.disease.toLowerCase();
+        const symptoms = item.symptoms.toLowerCase();
+        const duration = item.duration.toString().toLowerCase();
+        return (
+          name.includes(searchQuery) ||
+          disease.includes(searchQuery) ||
+          symptoms.includes(searchQuery) ||
+          duration.includes(searchQuery)
+        );
+      });
+      displayResults(filteredData);
+    }
+
+    function displayResults(data) {
+      searchResults.innerHTML = '';
+      if (data.length === 0) {
+        searchResults.innerHTML = '<p>No results found.</p>';
+      } else {
+        data.forEach((item) => {
+          const result = document.createElement('div');
+          result.classList.add('result');
+          result.innerHTML = `
+            <h4>${item.name}</h4>
+            <p>Disease: ${item.disease}</p>
+            <p>Symptoms: ${item.symptoms}</p>
+            <p>Duration: ${item.duration}</p>
+          `;
+          searchResults.appendChild(result);
+        });
+      }
+    }
+
+    searchInput.addEventListener('input', filterData);
+    displayResults(predata);
+  </script>
+</body>
+</html>
