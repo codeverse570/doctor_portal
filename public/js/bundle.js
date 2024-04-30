@@ -11213,7 +11213,7 @@ var showAlert = exports.showAlert = function showAlert(type, msg) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.signUp = exports.save_data = exports.logout = exports.logIn = void 0;
+exports.signUp = exports.save_data2 = exports.save_data = exports.logout = exports.logIn = void 0;
 var _axios = _interopRequireDefault(require("axios"));
 var _alert = require("./alert");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -11336,7 +11336,7 @@ var signUp = exports.signUp = /*#__PURE__*/function () {
   };
 }();
 var save_data = exports.save_data = /*#__PURE__*/function () {
-  var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(user) {
+  var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(data1) {
     var res;
     return _regeneratorRuntime().wrap(function _callee4$(_context4) {
       while (1) switch (_context4.prev = _context4.next) {
@@ -11347,7 +11347,7 @@ var save_data = exports.save_data = /*#__PURE__*/function () {
           return (0, _axios.default)({
             method: "Post",
             url: "/api/user/postData",
-            data: user
+            data: data1
           });
         case 4:
           res = _context4.sent;
@@ -11370,6 +11370,42 @@ var save_data = exports.save_data = /*#__PURE__*/function () {
   }));
   return function save_data(_x4) {
     return _ref4.apply(this, arguments);
+  };
+}();
+var save_data2 = exports.save_data2 = /*#__PURE__*/function () {
+  var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(data2) {
+    var res;
+    return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+      while (1) switch (_context5.prev = _context5.next) {
+        case 0:
+          _context5.prev = 0;
+          _context5.next = 3;
+          return (0, _axios.default)({
+            method: "Post",
+            url: "/api/user/postData2",
+            data: data2
+          });
+        case 3:
+          res = _context5.sent;
+          if (res.data.message === "success") {
+            (0, _alert.showAlert)(res.data.message, "Data Saved");
+            window.location.assign('/');
+          }
+          _context5.next = 11;
+          break;
+        case 7:
+          _context5.prev = 7;
+          _context5.t0 = _context5["catch"](0);
+          console.log(_context5.t0);
+          (0, _alert.showAlert)("error", _context5.t0.response.data.message);
+        case 11:
+        case "end":
+          return _context5.stop();
+      }
+    }, _callee5, null, [[0, 7]]);
+  }));
+  return function save_data2(_x5) {
+    return _ref5.apply(this, arguments);
   };
 }();
 },{"axios":"../../node_modules/axios/index.js","./alert":"alert.js"}],"updateUser.js":[function(require,module,exports) {
@@ -12587,19 +12623,19 @@ if (Filled_data) {
         while (1) switch (_context4.prev = _context4.next) {
           case 0:
             e.preventDefault();
-            // console.log("hello")
+            console.log("hello");
             name = document.getElementById("name").value;
             email = document.getElementById("email").value;
             phone = document.getElementById('phone').value;
             description = document.getElementById('description').value; // const doctor =Filled_data.dataset.id;
-            _context4.next = 7;
+            _context4.next = 8;
             return (0, _login.save_data)({
               name: name,
               email: email,
               phone: phone,
               description: description
             });
-          case 7:
+          case 8:
           case "end":
             return _context4.stop();
         }
@@ -12610,21 +12646,30 @@ if (Filled_data) {
     };
   }());
 }
-var forgetPassForm = document.getElementById("forgetPassForm");
-// console.log(forgetPassForm)
-if (forgetPassForm) {
-  // console.log('hello')
-  var email = document.getElementById("email");
-  forgetPassForm.addEventListener("submit", /*#__PURE__*/function () {
+var Filled_data2 = document.getElementById("filled_data2");
+console.log(Filled_data2);
+if (Filled_data2) {
+  Filled_data2.addEventListener("submit", /*#__PURE__*/function () {
     var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(e) {
+      var name, email, disease, symptoms, duration;
       return _regeneratorRuntime().wrap(function _callee5$(_context5) {
         while (1) switch (_context5.prev = _context5.next) {
           case 0:
             e.preventDefault();
-            email = email.value;
-            _context5.next = 4;
-            return forgetPassword(email);
-          case 4:
+            name = document.getElementById("name").value;
+            email = document.getElementById("email").value;
+            disease = document.getElementById("disease").value;
+            symptoms = document.getElementById("symptoms").value;
+            duration = document.getElementById("duration").value;
+            _context5.next = 8;
+            return (0, _login.save_data2)({
+              name: name,
+              email: email,
+              disease: disease,
+              symptoms: symptoms,
+              duration: duration
+            });
+          case 8:
           case "end":
             return _context5.stop();
         }
@@ -12635,24 +12680,48 @@ if (forgetPassForm) {
     };
   }());
 }
-var resetPasswordForm = document.getElementById("resetPasswordForm");
-if (resetPasswordForm) {
-  resetPasswordForm.addEventListener("submit", /*#__PURE__*/function () {
+// const Filled_data2 = document.getElementById('filled_data2');
+
+// Filled_data2.addEventListener('submit', async (e) => {
+//   e.preventDefault();
+
+//   const formData = new FormData(form);
+//   const data = Object.fromEntries(formData);
+
+//   try {
+//     const response = await fetch('/submit-form', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify(data),
+//     });
+
+//     if (response.ok) {
+//       console.log('Data submitted successfully');
+//     } else {
+//       console.error('Error submitting data');
+//     }
+//   } catch (err) {
+//     console.error('Error:', err);
+//   }
+// });
+
+var forgetPassForm = document.getElementById("forgetPassForm");
+// console.log(forgetPassForm)
+if (forgetPassForm) {
+  // console.log('hello')
+  var email = document.getElementById("email");
+  forgetPassForm.addEventListener("submit", /*#__PURE__*/function () {
     var _ref6 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6(e) {
-      var password, passwordConfirm, token;
       return _regeneratorRuntime().wrap(function _callee6$(_context6) {
         while (1) switch (_context6.prev = _context6.next) {
           case 0:
             e.preventDefault();
-            password = document.getElementById("password").value;
-            passwordConfirm = document.getElementById("confirmPassword").value;
-            token = e.target.dataset.token; //    console.log(password,passwordConfirm)
-            _context6.next = 6;
-            return resetPassword({
-              password: password,
-              passwordConfirm: passwordConfirm
-            }, token);
-          case 6:
+            email = email.value;
+            _context6.next = 4;
+            return forgetPassword(email);
+          case 4:
           case "end":
             return _context6.stop();
         }
@@ -12660,6 +12729,34 @@ if (resetPasswordForm) {
     }));
     return function (_x6) {
       return _ref6.apply(this, arguments);
+    };
+  }());
+}
+var resetPasswordForm = document.getElementById("resetPasswordForm");
+if (resetPasswordForm) {
+  resetPasswordForm.addEventListener("submit", /*#__PURE__*/function () {
+    var _ref7 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7(e) {
+      var password, passwordConfirm, token;
+      return _regeneratorRuntime().wrap(function _callee7$(_context7) {
+        while (1) switch (_context7.prev = _context7.next) {
+          case 0:
+            e.preventDefault();
+            password = document.getElementById("password").value;
+            passwordConfirm = document.getElementById("confirmPassword").value;
+            token = e.target.dataset.token; //    console.log(password,passwordConfirm)
+            _context7.next = 6;
+            return resetPassword({
+              password: password,
+              passwordConfirm: passwordConfirm
+            }, token);
+          case 6:
+          case "end":
+            return _context7.stop();
+        }
+      }, _callee7);
+    }));
+    return function (_x7) {
+      return _ref7.apply(this, arguments);
     };
   }());
 }
@@ -12688,7 +12785,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61308" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51648" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

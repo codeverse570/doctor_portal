@@ -63,13 +63,13 @@ export const signUp= async(user)=>{
 }
 
 
-export const save_data = async(user)=>{
+export const save_data = async(data1)=>{
     try {
         console.log('sign')
         const res = await axios({
             method: "Post",
             url: "/api/user/postData",
-            data: user
+            data: data1
         })
         if (res.data.message === "success") {
             showAlert(res.data.message, "Data Saved")
@@ -81,3 +81,21 @@ export const save_data = async(user)=>{
         showAlert("error", err.response.data.message)
     }
 }
+
+export const save_data2 = async(data2) => {
+    try {
+        const res = await axios({
+            method: "Post",
+            url: "/api/user/postData2",
+            data: data2
+        });
+        if (res.data.message === "success") {
+            showAlert(res.data.message, "Data Saved");
+            window.location.assign('/');
+        }
+    } catch (err) {
+        console.log(err);
+        showAlert("error", err.response.data.message);
+    }
+};
+

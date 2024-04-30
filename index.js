@@ -15,7 +15,7 @@ app.use(morgan("tiny"))
 app.use(express.json({ limit: '10kb' }))
 const uri = "mongodb+srv://neeraj:Neeraj%40570@atlascluster.kyrytm8.mongodb.net/?retryWrites=true&w=majority";
 const user = require("./models/User").User
-const data = require("./models/User").data
+
 
 mongoose.connect(uri, {
     useNewUrlParser: true, 
@@ -57,8 +57,11 @@ app.get('/findaDoctor',auth.isLogIn,auth.checkLog, async function(req, res) {
     res.render("findaDoctor", {docArray: allDocs});
 
 })
-app.get("/form",auth.isLogIn,auth.checkLog, auth.restrictTo("doctor"),(req,res)=>{
+app.get("/form",auth.isLogIn,auth.checkLog, (req,res)=>{
     res.render("form.ejs");
+})
+app.get("/form2",auth.isLogIn,auth.checkLog,(req,res)=>{
+    res.render("form2.ejs");
 })
 app.get("/profile",auth.isLogIn,auth.checkLog,(req,res)=>{
      res.render("profile")
